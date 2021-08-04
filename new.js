@@ -11,7 +11,10 @@
 
 // Instructions: The current code uses JSX to assign a div element to the constant JSX. Replace the div with an h1 element and add the text Hello JSX! inside it.
 
-const JSX = <div></div>;
+const JSX = <h1>
+              Hello JSX
+            </h1>
+;
 
 // 2 React: Create a Complex JSX Element
 // The last challenge was a simple example of JSX, but JSX can represent more complex HTML as well.
@@ -26,11 +29,11 @@ const JSX = <div></div>;
 
 // Valid JSX:
 
-// <div>
-//   <p>Paragraph One</p>
-//   <p>Paragraph Two</p>
-//   <p>Paragraph Three</p>
-// </div>
+{/* <div>
+  <p>Paragraph One</p>
+  <p>Paragraph Two</p>
+  <p>Paragraph Three</p>
+</div> */}
 // Invalid JSX:
 
 // <p>Paragraph One</p>
@@ -42,6 +45,21 @@ const JSX = <div></div>;
 
 // Note: When rendering multiple elements like this, you can wrap them all in parentheses, but it's not strictly required. Also notice this challenge uses a div tag to wrap all the child elements within a single parent element. If you remove the div, the JSX will no longer transpile. Keep this in mind, since it will also apply when you return JSX elements in React components.
 
+const JSX = (
+  <div>
+    <h1>Austin</h1>
+    <p>cant type</p>
+    <ul>
+      <li>One</li>
+      <li>Two</li>
+      <li>Three</li>
+    </ul>
+  </div>
+);
+
+
+
+
 // 3.React: Add Comments in JSX
 // JSX is a syntax that gets compiled into valid JavaScript. Sometimes, for readability, you might need to add comments to your code. Like most programming languages, JSX has its own way to do this.
 
@@ -49,11 +67,12 @@ const JSX = <div></div>;
 
 // The code editor has a JSX element similar to what you created in the last challenge. Add a comment somewhere within the provided div element, without modifying the existing h1 or p elements.
 const JSX = (
-    <div>
-      <h1>This is a block of JSX</h1>
-      <p>Here's a subtitle</p>
-    </div>
-  );
+  <div>
+  {/* comment here */}
+    <h1>This is a block of JSX</h1>
+    <p>Here's a subtitle</p>
+  </div>
+);
 
 
 
@@ -75,7 +94,7 @@ const JSX = (
     </div>
   );
   // Change code below this line
-
+  ReactDOM.render(<JSX/>, document.getElementById('challenge-node')) 
 
   // 5 Define an HTML Class in JSX
 // Now that you're getting comfortable writing JSX, you may be wondering how it differs from HTML.
@@ -88,7 +107,7 @@ const JSX = (
 
 // Apply a class of myDiv to the div provided in the JSX code.
 const JSX = (
-  <div>
+  <div className='myDiv'>
     <h1>Add a class to this div</h1>
   </div>
 );
@@ -108,13 +127,13 @@ const JSX = (
 // Fix the errors in the code editor so that it is valid JSX and successfully transpiles. Make sure you don't change any of the content - you only need to close tags where they are needed.
 
 
-// const JSX = (
-//   <div>
-//     <h2>Welcome to React!</h2> <br >
-//     <p>Be sure to close all tags!</p>
-//     <hr >
-//   </div>
-// );
+const JSX = (
+  <div>
+    <h2>Welcome to React!</h2> <br />
+    <p>Be sure to close all tags!</p>
+    <hr />
+  </div>
+);
 
  {/* 7 Create a Stateless Functional Component
 Components are the core of React. Everything in React is a component and here you will learn how to create one.
@@ -131,23 +150,25 @@ The code editor has a function called MyComponent. Complete this function so it 
 Note: The text is considered a child of the div element, so you will not be able to use a self-closing tag. */}
 
 const MyComponent = function() {
-
+  return (
+      <div>Some string of text</div>
+  )
 }
 
 //8 Create a React Component
 // The other way to define a React component is with the ES6 class syntax. In the following example, Kitten extends React.Component:
 
-// class Kitten extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
+class Kitten extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-//   render() {
-//     return (
-//       <h1>Hi</h1>
-//     );
-//   }
-// }
+  render() {
+    return (
+      <h1>Hi</h1>
+    );
+  }
+}
 // This creates an ES6 class Kitten which extends the React.Component class. So the Kitten class now has access to many useful React features, such as local state and lifecycle hooks. Don't worry if you aren't familiar with these terms yet, they will be covered in greater detail in later challenges. Also notice the Kitten class has a constructor defined within it that calls super(). It uses super() to call the constructor of the parent class, in this case React.Component. The constructor is a special method used during the initialization of objects that are created with the class keyword. It is best practice to call a component's constructor with super, and pass props to both. This makes sure the component is initialized properly. For now, know that it is standard for this code to be included. Soon you will see other uses for the constructor as well as props.
 
 // MyComponent is defined in the code editor using class syntax. Finish writing the render method so it returns a div element that contains an h1 with the text Hello React!.
@@ -158,7 +179,9 @@ class MyComponent extends React.Component {
   }
   render() {
     // Change code below this line
-
+    <div>
+      <h1>Hello React</h1>
+    </div>
 
 
     // Change code above this line
@@ -169,14 +192,17 @@ class MyComponent extends React.Component {
 // Now we will look at how we can compose multiple React components together. Imagine you are building an app and have created three components: a Navbar, Dashboard, and Footer.
 
 // To compose these components together, you could create an App parent component which renders each of these three components as children. To render a component as a child in a React component, you include the component name written as a custom HTML tag in the JSX. For example, in the render method you could write:
-
-// return (
-//  <App>
-//   <Navbar />
-//   <Dashboard />
-//   <Footer />
-//  </App>
-// )
+import Navbar from './Nav'
+return (
+ <App>
+ {/* Navbar.js */}
+  <Navbar />
+  {/* Dashboard.js */}
+  <Dashboard />
+  {/* Footer.js */}
+  <Footer />
+ </App>
+)
 // When React encounters a custom HTML tag that references another component (a component name wrapped in < /> like in this example), it renders the markup for that component in the location of the tag. This should illustrate the parent/child relationship between the App component and the Navbar, Dashboard, and Footer.
 
 // In the code editor, there is a simple functional component called ChildComponent and a class component called ParentComponent. Compose the two together by rendering the ChildComponent within the ParentComponent. Make sure to close the ChildComponent tag with a forward slash.
@@ -200,7 +226,7 @@ class ParentComponent extends React.Component {
       <div>
         <h1>I am the parent</h1>
         { /* Change code below this line */ }
-
+      <ChildComponent />
 
         { /* Change code above this line */ }
       </div>
@@ -233,7 +259,7 @@ const Fruits = () => {
   return (
     <div>
       { /* Change code below this line */ }
-
+    <TypesOfFruit />
       { /* Change code above this line */ }
     </div>
   );
@@ -249,7 +275,7 @@ class TypesOfFood extends React.Component {
       <div>
         <h1>Types of Food:</h1>
         { /* Change code below this line */ }
-
+        <Fruits />
         { /* Change code above this line */ }
       </div>
     );
@@ -271,7 +297,8 @@ class Fruits extends React.Component {
       <div>
         <h2>Fruits:</h2>
         { /* Change code below this line */ }
-
+        <NonCitrus />
+        <Citrus />
         { /* Change code above this line */ }
       </div>
     );
@@ -287,7 +314,7 @@ class TypesOfFood extends React.Component {
       <div>
         <h1>Types of Food:</h1>
         { /* Change code below this line */ }
-
+        <Fruits />
         { /* Change code above this line */ }
         <Vegetables />
       </div>
@@ -312,7 +339,8 @@ class TypesOfFood extends React.Component {
       <div>
         <h1>Types of Food:</h1>
         {/* Change code below this line */}
-
+      <Fruits />
+      <Vegetables />
         {/* Change code above this line */}
       </div>
     );
@@ -320,7 +348,7 @@ class TypesOfFood extends React.Component {
 };
 
 // Change code below this line
-
+ReactDOM.render(<TypesOfFood />, document.getElementById('challenge-node'));
 
 // 13 Write a React Component from Scratch
 // Now that you've learned the basics of JSX and React components, it's time to write a component on your own. React components are the core building blocks of React applications so it's important to become very familiar with writing them. Remember, a typical React component is an ES6 class which extends React.Component. It has a render method that returns HTML (from JSX) or null. This is the basic form of a React component. Once you understand this well, you will be prepared to start building more complex React projects.
@@ -329,14 +357,28 @@ class TypesOfFood extends React.Component {
 
 // Render this component to the DOM using ReactDOM.render(). There is a div with id='challenge-node' available for you to use.
 
+class MyComponent extends React.Component{
+  constructor(props){
+     super(props)
+  }
+ 
 
+  render(){
+    return(
+      <div>
+        <h1>My first react component</h1>
+      </div>
 
+    )
+  }
+}
+ReactDOM.render(<MyComponent />, document.getElementById('challenge-node'));
 // 14 Pass Props to a Stateless Functional Component
 // The previous challenges covered a lot about creating and composing JSX elements, functional components, and ES6 style class components in React. With this foundation, it's time to look at another feature very common in React: props. In React, you can pass props, or properties, to child components. Say you have an App component which renders a child component called Welcome which is a stateless functional component. You can pass Welcome a user property by writing:
 
-// <App>
-//   <Welcome user='Mark' />
-// </App>
+<App>
+  <Welcome user='Mark' />
+</App>
 // You use custom HTML attributes created by you and supported by React to be passed to the component. In this case, the created property user is passed to the component Welcome. Since Welcome is a stateless functional component, it has access to this value like so:
 
 // const Welcome = (props) => <h1>Hello, {props.user}!</h1>
@@ -347,7 +389,7 @@ const CurrentDate = (props) => {
   return (
     <div>
       { /* Change code below this line */ }
-      <p>The current date is: </p>
+      <p>The current date is:{props.date} </p>
       { /* Change code above this line */ }
     </div>
   );
@@ -362,7 +404,7 @@ class Calendar extends React.Component {
       <div>
         <h3>What date is it?</h3>
         { /* Change code below this line */ }
-        <CurrentDate />
+        <CurrentDate date={Date()}/>
         { /* Change code above this line */ }
       </div>
     );
@@ -372,16 +414,16 @@ class Calendar extends React.Component {
 // // 15 Pass an Array as Props
 // The last challenge demonstrated how to pass information from a parent component to a child component as props or properties. This challenge looks at how arrays can be passed as props. To pass an array to a JSX element, it must be treated as JavaScript and wrapped in curly braces.
 
-// <ParentComponent>
-//   <ChildComponent colors={["green", "blue", "red"]} />
-// </ParentComponent>
+<ParentComponent>
+  <ChildComponent colors={["green", "blue", "red"]} />
+</ParentComponent>
 // The child component then has access to the array property colors. Array methods such as join() can be used when accessing the property. const ChildComponent = (props) => <p>{props.colors.join(', ')}</p> This will join all colors array items into a comma separated string and produce: <p>green, blue, red</p> Later, we will learn about other common methods to render arrays of data in React.
 
 // There are List and ToDo components in the code editor. When rendering each List from the ToDo component, pass in a tasks property assigned to an array of to-do tasks, for example ["walk dog", "workout"]. Then access this tasks array in the List component, showing its value within the p element. Use join(", ") to display the props.tasksarray in the p element as a comma separated list. Today's list should have at least 2 tasks and tomorrow's should have at least 3 tasks.
 
 const List = (props) => {
   { /* Change code below this line */ }
-  return <p>{}</p>
+  return <p>{props.tasks.join(', ')}</p>
   { /* Change code above this line */ }
 };
 
@@ -395,9 +437,9 @@ class ToDo extends React.Component {
         <h1>To Do Lists</h1>
         <h2>Today</h2>
         { /* Change code below this line */ }
-        <List/>
+        <List tasks={['do laundry', 'pay bills']}/>
         <h2>Tomorrow</h2>
-        <List/>
+        <List tasks={['make money', 'sleep', 'repeat']}/>
         { /* Change code above this line */ }
       </div>
     );
@@ -417,7 +459,9 @@ const ShoppingCart = (props) => {
   )
 };
 // Change code below this line
-
+ShoppingCart.defaultProps = {
+  items: 0
+}
 // 17 Override Default Props
 // The ability to set default props is a useful feature in React. The way to override the default props is to explicitly set the prop values for a component.
 
@@ -438,7 +482,7 @@ class ShoppingCart extends React.Component {
   }
   render() {
     { /* Change code below this line */ }
-    return <Items />
+    return <Items quantity={10}/>
     { /* Change code above this line */ }
   }
 };
@@ -460,7 +504,7 @@ const Items = (props) => {
 };
 
 // Change code below this line
-
+Items.propTypes = { quantity: PropTypes.number.isRequired}
 // Change code above this line
 
 Items.defaultProps = {
@@ -491,7 +535,7 @@ class ReturnTempPassword extends React.Component {
     return (
         <div>
             { /* Change code below this line */ }
-            <p>Your temporary password is: <strong></strong></p>
+            <p>Your temporary password is:  <strong>{this.props.tempPassword}</strong></p>
             { /* Change code above this line */ }
         </div>
     );
@@ -510,7 +554,7 @@ class ResetPassword extends React.Component {
           <h3>We've generated a new temporary password for you.</h3>
           <h3>Please reset this password from your account settings ASAP.</h3>
           { /* Change code below this line */ }
-
+      <ReturnTempPassword tempPassword='xxxxxxxx'/>
           { /* Change code above this line */ }
         </div>
     );
@@ -538,3 +582,225 @@ class CampSite extends React.Component {
   }
 };
 // Change code below this line
+const Camper = (props) => <p>{props.name}</p>;
+Camper.propTypes = {name: PropTypes.string.isRequired};
+
+// 21 Create a Stateful Component
+// One of the most important topics in React is state. State consists of any data your application needs to know about, that can change over time. You want your apps to respond to state changes and present an updated UI when necessary. React offers a nice solution for the state management of modern web applications.
+
+// You create state in a React component by declaring a state property on the component class in its constructor. This initializes the component with state when it is created. The state property must be set to a JavaScript object. Declaring it looks like this:
+
+// this.state = {
+
+// }
+// You have access to the state object throughout the life of your component. You can update it, render it in your UI, and pass it as props to child components. The state object can be as complex or as simple as you need it to be. Note that you must create a class component by extending React.Component in order to create state like this.
+
+// There is a component in the code editor that is trying to render a name property from its state. However, there is no state defined. Initialize the component with state in the constructor and assign your name to a property of name.
+class StatefulComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    // Only change code below this line
+
+    // Only change code above this line
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+
+//22. Render State in the User Interface
+// Once you define a component's initial state, you can display any part of it in the UI that is rendered. If a component is stateful, it will always have access to the data in state in its render() method. You can access the data with this.state.
+
+// If you want to access a state value within the return of the render method, you have to enclose the value in curly braces.
+
+// state is one of the most powerful features of components in React. It allows you to track important data in your app and render a UI in response to changes in this data. If your data changes, your UI will change. React uses what is called a virtual DOM, to keep track of changes behind the scenes. When state data updates, it triggers a re-render of the components using that data - including child components that received the data as a prop. React updates the actual DOM, but only where necessary. This means you don't have to worry about changing the DOM. You simply declare what the UI should look like.
+
+// Note that if you make a component stateful, no other components are aware of its state. Its state is completely encapsulated, or local to that component, unless you pass state data to a child component as props. This notion of encapsulated state is very important because it allows you to write certain logic, then have that logic contained and isolated in one place in your code.
+
+// In the code editor, MyComponent is already stateful. Define an h1 tag in the component's render method which renders the value of name from the component's state.
+
+// Note: The h1 should only render the value from state and nothing else. In JSX, any code you write with curly braces { } will be treated as JavaScript. So to access the value from state just enclose the reference in curly braces.
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'freeCodeCamp'
+    }
+  }
+  render() {
+    return (
+      <div>
+        { /* Change code below this line */ }
+
+        { /* Change code above this line */ }
+      </div>
+    );
+  }
+};
+
+//23 Render State in the User Interface Another Way
+// There is another way to access state in a component. In the render() method, before the return statement, you can write JavaScript directly. For example, you could declare functions, access data from state or props, perform computations on this data, and so on. Then, you can assign any data to variables, which you have access to in the return statement.
+
+// In the MyComponent render method, define a const called name and set it equal to the name value in the component's state. Because you can write JavaScript directly in this part of the code, you don't have to enclose this reference in curly braces.
+
+// Next, in the return statement, render this value in an h1 tag using the variable name. Remember, you need to use the JSX syntax (curly braces for JavaScript) in the return statement.
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'freeCodeCamp'
+    }
+  }
+  render() {
+    // Change code below this line
+
+    // Change code above this line
+    return (
+      <div>
+        { /* Change code below this line */ }
+
+        { /* Change code above this line */ }
+      </div>
+    );
+  }
+};
+
+// // 24 Set State with this.setState
+// The previous challenges covered component state and how to initialize state in the constructor. There is also a way to change the component's state. React provides a method for updating component state called setState. You call the setState method within your component class like so: this.setState(), passing in an object with key-value pairs. The keys are your state properties and the values are the updated state data. For instance, if we were storing a username in state and wanted to update it, it would look like this:
+
+// this.setState({
+//   username: 'Lewis'
+// });
+// React expects you to never modify state directly, instead always use this.setState() when state changes occur. Also, you should note that React may batch multiple state updates in order to improve performance. What this means is that state updates through the setState method can be asynchronous. There is an alternative syntax for the setState method which provides a way around this problem. This is rarely needed but it's good to keep it in mind! Please consult the React documentation for further details.
+
+// There is a button element in the code editor which has an onClick() handler. This handler is triggered when the button receives a click event in the browser, and runs the handleClick method defined on MyComponent. Within the handleClick method, update the component state using this.setState(). Set the name property in state to equal the string React Rocks!.
+
+// Click the button and watch the rendered state update. Don't worry if you don't fully understand how the click handler code works at this point. It's covered in upcoming challenges.
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'Initial State'
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    // Change code below this line
+
+    // Change code above this line
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>Click Me</button>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+
+
+
+// 25 Bind 'this' to a Class Method 
+// In addition to setting and updating state, you can also define methods for your component class. A class method typically needs to use the this keyword so it can access properties on the class (such as state and props) inside the scope of the method. There are a few ways to allow your class methods to access this.
+
+// One common way is to explicitly bind this in the constructor so this becomes bound to the class methods when the component is initialized. You may have noticed the last challenge used this.handleClick = this.handleClick.bind(this) for its handleClick method in the constructor. Then, when you call a function like this.setState() within your class method, this refers to the class and will not be undefined.
+
+// Note: The this keyword is one of the most confusing aspects of JavaScript but it plays an important role in React. Although its behavior here is totally normal, these lessons aren't the place for an in-depth review of this so please refer to other lessons if the above is confusing!
+
+// The code editor has a component with a state that keeps track of the text. It also has a method which allows you to set the text to You clicked!. However, the method doesn't work because it's using the this keyword that is undefined. Fix it by explicitly binding this to the handleClick() method in the component's constructor.
+
+// Next, add a click handler to the button element in the render method. It should trigger the handleClick() method when the button receives a click event. Remember that the method you pass to the onClick handler needs curly braces because it should be interpreted directly as JavaScript.
+
+// Once you complete the above steps you should be able to click the button and see You clicked!.
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "Hello"
+    };
+    // Change code below this line
+
+    // Change code above this line
+  }
+  handleClick() {
+    this.setState({
+      text: "You clicked!"
+    });
+  }
+  render() {
+    return (
+      <div>
+        { /* Change code below this line */ }
+        <button>Click Me</button>
+        { /* Change code above this line */ }
+        <h1>{this.state.text}</h1>
+      </div>
+    );
+  }
+};
+
+
+// // 26 Use State to Toggle an Element
+// Sometimes you might need to know the previous state when updating the state. However, state updates may be asynchronous - this means React may batch multiple setState() calls into a single update. This means you can't rely on the previous value of this.state or this.props when calculating the next value. So, you should not use code like this:
+
+// this.setState({
+//   counter: this.state.counter + this.props.increment
+// });
+// Instead, you should pass setState a function that allows you to access state and props. Using a function with setState guarantees you are working with the most current values of state and props. This means that the above should be rewritten as:
+
+// this.setState((state, props) => ({
+//   counter: state.counter + props.increment
+// }));
+// You can also use a form without props if you need only the state:
+
+// this.setState(state => ({
+//   counter: state.counter + 1
+// }));
+// Note that you have to wrap the object literal in parentheses, otherwise JavaScript thinks it's a block of code.
+
+// MyComponent has a visibility property which is initialized to false. The render method returns one view if the value of visibility is true, and a different view if it is false.
+
+// Currently, there is no way of updating the visibility property in the component's state. The value should toggle back and forth between true and false. There is a click handler on the button which triggers a class method called toggleVisibility(). Pass a function to setState to define this method so that the state of visibility toggles to the opposite value when the method is called. If visibility is false, the method sets it to true, and vice versa.
+
+// Finally, click the button to see the conditional rendering of the component based on its state.
+
+// Hint: Don't forget to bind the this keyword to the method in the constructor!
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibility: false
+    };
+    // Change code below this line
+
+    // Change code above this line
+  }
+  // Change code below this line
+
+  // Change code above this line
+  render() {
+    if (this.state.visibility) {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+          <h1>Now you see me!</h1>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+        </div>
+      );
+    }
+  }
+}
